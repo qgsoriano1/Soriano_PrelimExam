@@ -6,18 +6,21 @@
   - name: Update APT package manager
     apt:
       update_cache: yes
+
   - name: install python3-pip
     apt:
       name: python3-pip
+
   - name: install python3 package
     apt:
-      name: python3
-  - name: install python-pip
+      name:
+        - python3
+
+  - name: install java open-jdk
+    become: yes
     apt:
-      name: python-pip
-  - name: install python package
-    apt:
-      name: python3
-  - name: install ansible-java
-    apt: 
-      name: ansible-java
+      name: "{{packages}}"
+      state: present
+    vars:
+     packages:
+       - openjdk-11-jdk
